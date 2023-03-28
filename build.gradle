@@ -15,8 +15,8 @@ sourceCompatibility = '17'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.projectlombok:lombok:1.18.22'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.boot:spring-boot-gradle-plugin:3.0.4'
 }
 
 tasks.named('test') {

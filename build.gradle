@@ -11,10 +11,6 @@ group = 'com.malikatique'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -27,8 +23,8 @@ tasks.named('test') {
 publishing {
 	repositories {
 		maven {
-            name: "GitHubPackages"
-            url: "https://maven.pkg.github.com/malickateeq/micro-serve"
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/malickateeq/micro-serve"
 		}
 		credentials {
 			username = System.getenv("GITHUB_ACTOR")

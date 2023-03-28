@@ -20,6 +20,10 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+repositories {
+	mavenCentral()
+}
+
 publishing {
 	repositories {
 		maven {

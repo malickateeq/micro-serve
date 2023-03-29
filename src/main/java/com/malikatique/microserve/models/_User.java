@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "users")
-public class User implements UserDetails {
+public class _User implements UserDetails {
     @Id
     private String id;
 
@@ -39,7 +39,7 @@ public class User implements UserDetails {
     private String password;
     private Integer status = 1;
 
-    private Role role;
+    private _Role role;
 
     // Validations
     @AssertTrue(message = "Email is required")

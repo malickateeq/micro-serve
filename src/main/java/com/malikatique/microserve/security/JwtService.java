@@ -1,10 +1,10 @@
 package com.malikatique.microserve.security;
 
 import com.malikatique.microserve.exception.AuthException;
-import com.malikatique.microserve.models.RefreshToken;
-import com.malikatique.microserve.models.User;
-import com.malikatique.microserve.repository.RefreshTokenRepository;
-import com.malikatique.microserve.repository.UserRepository;
+import com.malikatique.microserve.models._RefreshToken;
+import com.malikatique.microserve.models._User;
+import com.malikatique.microserve.repository._RefreshTokenRepository;
+import com.malikatique.microserve.repository._UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,10 +24,10 @@ public class JwtService {
     private static final String SECRET_KEY = "703273357538782F413F4428472B4B6250655368566D59713374367739792442";
     private static final Long EXPIRATION_TIME = Long.valueOf(1000 * 60 * 5); // 5 Minutes
     private static final Long REFRESH_EXPIRATION_TIME = Long.valueOf(1000 * 60 * 60 * 24 * 5);  // 5 Days
-    private final RefreshTokenRepository refreshTokenRepository;
-    private final UserRepository userRepository;
+    private final _RefreshTokenRepository refreshTokenRepository;
+    private final _UserRepository userRepository;
 
-    public JwtService(RefreshTokenRepository refreshTokenRepository, UserRepository userRepository) {
+    public JwtService(_RefreshTokenRepository refreshTokenRepository, _UserRepository userRepository) {
         this.refreshTokenRepository = refreshTokenRepository;
         this.userRepository = userRepository;
     }
@@ -64,7 +64,7 @@ public class JwtService {
 
     // Process#3 Check if token user status
     private boolean isTokenUserValid(Claims token) {
-        User user = userRepository.findById(token.getSubject()).orElseThrow();
+        _User user = userRepository.findById(token.getSubject()).orElseThrow();
         if(user.getStatus() != 1) {
             throw new AuthException("Your account is on hold!");
         }
@@ -73,7 +73,7 @@ public class JwtService {
 
     // Process#4 Check if refreshToken is not revoked
     private boolean isRefreshTokenValid(String token, Claims decodedToken) {
-        RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(token);
+        _RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(token);
         var isRefreshToken = decodedToken.get("isRefreshToken");
         if(isRefreshToken == null || (boolean)isRefreshToken != true) {
             throw new AuthException("Your session has been expired. Please login again.");
@@ -91,9 +91,9 @@ public class JwtService {
     }
 
     // Generate RefreshToken
-    public RefreshToken generateRefreshToken(User user) {
-        RefreshToken refreshToken = refreshTokenRepository.findExistingRefreshToken(user.getId());
-        if(refreshToken == null) refreshToken = new RefreshToken();
+    public _RefreshToken generateRefreshToken(_User user) {
+        _RefreshToken refreshToken = refreshTokenRepository.findExistingRefreshToken(user.getId());
+        if(refreshToken == null) refreshToken = new _RefreshToken();
 
         refreshToken.setUser(user);
         refreshToken.setIssuedAt(new Date(System.currentTimeMillis()));

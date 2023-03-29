@@ -15,12 +15,12 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Document(collection = "access_tokens")
-public class RefreshToken {
+public class _RefreshToken {
     @Id
     private String id;
 
     @DBRef
-    private User user;
+    private _User user;
 
     private String refreshToken;
     private Date expirationDate;

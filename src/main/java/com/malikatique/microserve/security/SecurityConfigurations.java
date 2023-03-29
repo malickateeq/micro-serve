@@ -23,7 +23,6 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        System.out.println("Package: SecurityFilterChain");
         http
                 .csrf().disable() // Disable CSRF
                 .authorizeHttpRequests() // Start authorizing HTTP requests

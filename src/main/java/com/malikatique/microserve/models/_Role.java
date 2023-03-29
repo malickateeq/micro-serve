@@ -1,6 +1,6 @@
 package com.malikatique.microserve.models;
 
-public enum Role {
+public enum _Role {
     USER,
     ADMIN
 }

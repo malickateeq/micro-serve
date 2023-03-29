@@ -2,8 +2,8 @@ package com.malikatique.microserve.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.malikatique.microserve.exception.AuthException;
-import com.malikatique.microserve.models.User;
-import com.malikatique.microserve.repository.UserRepository;
+import com.malikatique.microserve.models._User;
+import com.malikatique.microserve.repository._UserRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,16 +37,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final MicoServiceSecurityConfig micoServiceSecurityConfig;
 
     @Autowired
-    private final UserRepository userRepo;
+    private final _UserRepository userRepo;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            System.out.println("Package: doFilterInternal");
-//            if(true) {
-//                throw new AuthException("Token is expired!");
-//            }
-
             // Phase#1 Exclude Un Auth APIs
             boolean isExcluded = Arrays.stream(micoServiceSecurityConfig.UN_AUTH_APIS)
                     .anyMatch(request.getRequestURI()::equals);
@@ -54,19 +49,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            System.out.println("Package: Here");
 
             // Phase#2 Validate accessToken
             final String accessToken = request.getHeader("accessToken");
             if(accessToken == null) {
-                filterChain.doFilter(request, response);
-                return;
+                throw new AuthException("Invalid accessToken!");
             }
 
             Claims claims = jwtService.verifyToken(accessToken, false);
             if(SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(claims.getSubject());
-                User authUser = userRepo.findById(claims.getSubject()).orElseThrow();
+                _User authUser = userRepo.findById(claims.getSubject()).orElseThrow();
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         authUser,
                         "abc credentials",

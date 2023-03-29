@@ -12,11 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "otps")
-public class Otp {
+public class _Otp {
     @Id
     private String id;
     @DBRef
-    private User user;
+    private _User user;
 
     @NotNull
     @Pattern(regexp = "(PHONE|EMAIL)", message = "Verification Type must be either PHONE or EMAIL")

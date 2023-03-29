@@ -1,8 +1,8 @@
 package com.malikatique.microserve.utils;
 
 import lombok.Data;
-//import org.springframework.http.HttpStatusCode;
-//import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
 @Data
 public class ApiResponse {
@@ -35,7 +35,7 @@ public class ApiResponse {
         this.data = null;
     }
 
-//    public static ResponseEntity<Object> build(ApiResponse response) {
-//        return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getCode()));
-//    }
+    public static ResponseEntity<Object> build(ApiResponse response) {
+        return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getCode()));
+    }
 }

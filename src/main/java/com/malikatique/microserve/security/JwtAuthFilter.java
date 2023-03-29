@@ -1,6 +1,7 @@
 package com.malikatique.microserve.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.malikatique.microserve.exception.AuthException;
 import com.malikatique.microserve.models.User;
 import com.malikatique.microserve.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -42,6 +43,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             System.out.println("Package: doFilterInternal");
+            if(true) {
+                throw new AuthException("Token is expired!");
+            }
 
             // Phase#1 Exclude Un Auth APIs
             boolean isExcluded = Arrays.stream(micoServiceSecurityConfig.UN_AUTH_APIS)
@@ -50,6 +54,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
+            System.out.println("Package: Here");
 
             // Phase#2 Validate accessToken
             final String accessToken = request.getHeader("accessToken");

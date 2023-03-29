@@ -49,6 +49,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if(isExcluded) {
                 System.out.println("Package: HERE-1");
                 filterChain.doFilter(request, response);
+                return;
             }
             System.out.println("Package: HERE-2");
 

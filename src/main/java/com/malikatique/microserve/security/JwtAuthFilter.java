@@ -47,11 +47,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             boolean isExcluded = Arrays.stream(micoServiceSecurityConfig.UN_AUTH_APIS)
                     .anyMatch(request.getRequestURI()::equals);
             if(isExcluded) {
-                System.out.println("Package: HERE-1");
+                System.out.println("Bypassing UN_AUTH_API");
+                System.out.println(request.getRequestURI());
                 filterChain.doFilter(request, response);
                 return;
             }
-            System.out.println("Package: HERE-2");
 
             // Phase#2 Validate accessToken
             final String accessToken = request.getHeader("accessToken");

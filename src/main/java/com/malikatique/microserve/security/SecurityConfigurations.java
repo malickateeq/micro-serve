@@ -26,16 +26,12 @@ public class SecurityConfigurations {
         System.out.println("Package: filterChain");
         http
                 .csrf().disable() // Disable CSRF
-                .authorizeHttpRequests((authorize) ->
-                        authorize
-                        .requestMatchers("/auth/send-otp") // Exclude these API patterns
-                        .permitAll()
-                        .anyRequest().authenticated()) // Start authorizing HTTP requests
-
-//                .permitAll() // Add above patterns to whitelist
-//                .anyRequest() // Select all other requests except the above ones
-//                .authenticated() // And make them authenticated
-//                .and()
+                .authorizeHttpRequests() // Start authorizing HTTP requests
+                .requestMatchers(micoServiceSecurityConfig.UN_AUTH_APIS) // Exclude these API patterns
+                .permitAll() // Add above patterns to whitelist
+                .anyRequest() // Select all other requests except the above ones
+                .authenticated() // And make them authenticated
+                .and()
                 .sessionManagement() // Select Session Mgmt
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable Spring to create sessions
                 .and()

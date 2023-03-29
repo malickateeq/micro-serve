@@ -43,9 +43,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             System.out.println("Package: doFilterInternal");
-            if(true) {
-                throw new AuthException("Token is expired!");
-            }
+//            if(true) {
+//                throw new AuthException("Token is expired!");
+//            }
 
             // Phase#1 Exclude Un Auth APIs
             boolean isExcluded = Arrays.stream(micoServiceSecurityConfig.UN_AUTH_APIS)

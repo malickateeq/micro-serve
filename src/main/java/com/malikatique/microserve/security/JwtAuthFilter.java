@@ -42,10 +42,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
+            System.out.println("Package: doFilterInternal");
             // Phase#1 Exclude Un Auth APIs
             boolean isExcluded = Arrays.stream(micoServiceSecurityConfig.UN_AUTH_APIS)
                     .anyMatch(request.getRequestURI()::equals);
             if(isExcluded) {
+                System.out.println("Package: HERE-1");
                 filterChain.doFilter(request, response);
                 return;
             }

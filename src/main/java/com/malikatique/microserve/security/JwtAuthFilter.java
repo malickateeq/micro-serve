@@ -49,31 +49,30 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if(isExcluded) {
                 System.out.println("Bypassing UN_AUTH_API");
                 System.out.println(request.getRequestURI());
-                filterChain.doFilter(request, response);
-                return;
             }
+            else {
+                // Phase#2 Validate accessToken
+                final String accessToken = request.getHeader("accessToken");
+                if(accessToken == null) {
+                    throw new AuthException("Invalid accessToken!");
+                }
 
-            // Phase#2 Validate accessToken
-            final String accessToken = request.getHeader("accessToken");
-            if(accessToken == null) {
-                throw new AuthException("Invalid accessToken!");
+                Claims claims = jwtService.verifyToken(accessToken, false);
+                if(SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = this.userDetailsService.loadUserByUsername(claims.getSubject());
+                    _User authUser = userRepo.findById(claims.getSubject()).orElseThrow();
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            authUser,
+                            "abc credentials",
+                            null //userDetails.getAuthorities()
+                    );
+                    authToken.setDetails(
+                            new WebAuthenticationDetailsSource().buildDetails(request)
+                    );
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
+                // If the security checks pass, continue with the filter chain
             }
-
-            Claims claims = jwtService.verifyToken(accessToken, false);
-            if(SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(claims.getSubject());
-                _User authUser = userRepo.findById(claims.getSubject()).orElseThrow();
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        authUser,
-                        "abc credentials",
-                        null //userDetails.getAuthorities()
-                );
-                authToken.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
-                );
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
-            // If the security checks pass, continue with the filter chain
             filterChain.doFilter(request, response);
         } catch (RuntimeException ex) {
             response.setStatus(401);

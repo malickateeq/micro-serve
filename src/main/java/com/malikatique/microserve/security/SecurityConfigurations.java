@@ -22,21 +22,21 @@ public class SecurityConfigurations {
     private final MicoServiceSecurityConfig micoServiceSecurityConfig;
 
     @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         System.out.println("Package: filterChain");
         http
-                .csrf().disable() // Disable CSRF
-                .authorizeHttpRequests() // Start authorizing HTTP requests
-                .requestMatchers(micoServiceSecurityConfig.UN_AUTH_APIS) // Exclude these API patterns
-                .permitAll() // Add above patterns to whitelist
-                .anyRequest() // Select all other requests except the above ones
-                .authenticated() // And make them authenticated
-                .and()
-                .sessionManagement() // Select Session Mgmt
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable Spring to create sessions
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .csrf().disable() // Disable CSRF
+            .authorizeHttpRequests() // Start authorizing HTTP requests
+            .requestMatchers(micoServiceSecurityConfig.UN_AUTH_APIS) // Exclude these API patterns
+            .permitAll() // Add above patterns to whitelist
+            .anyRequest() // Select all other requests except the above ones
+            .authenticated() // And make them authenticated
+            .and()
+            .sessionManagement() // Select Session Mgmt
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable Spring to create sessions
+            .and()
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

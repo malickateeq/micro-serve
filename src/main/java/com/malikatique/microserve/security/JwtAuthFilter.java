@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Configuration
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -73,8 +75,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 }
                 // If the security checks pass, continue with the filter chain
             }
+            System.out.println("Package: before doFilter");
             filterChain.doFilter(request, response);
+            System.out.println("Package: after doFilter");
         } catch (RuntimeException ex) {
+            System.out.println("Package: In the Exception");
             response.setStatus(401);
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             Map<String, String> responseBody = new HashMap<>();

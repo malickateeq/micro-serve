@@ -10,6 +10,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@Configuration
 public class JwtService {
 
     private static final String SECRET_KEY = "703273357538782F413F4428472B4B6250655368566D59713374367739792442";

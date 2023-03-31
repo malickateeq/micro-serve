@@ -27,7 +27,7 @@ public class SecurityConfigurations {
         http
             .csrf().disable() // Disable CSRF
             .authorizeHttpRequests() // Start authorizing HTTP requests
-            .requestMatchers(micoServiceSecurityConfig.UN_AUTH_APIS) // Exclude these API patterns
+            .requestMatchers("/auth/**") // Exclude these API patterns
             .permitAll() // Add above patterns to whitelist
             .anyRequest() // Select all other requests except the above ones
             .authenticated() // And make them authenticated

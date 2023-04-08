@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @SpringBootApplication
 public class MicroServeApplication {
 	public static void main(String[] args) {

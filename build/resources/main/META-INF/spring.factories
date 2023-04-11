@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.malikatique.microserve.security.SecurityConfigurations
+com.malikatique.microserve.config.CommonAutoConfiguration

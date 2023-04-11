@@ -1,6 +1,5 @@
 package com.malikatique.microserve.config;
 
-
 import com.malikatique.microserve.MicroServeApplication;
 import com.malikatique.microserve.security.JwtService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

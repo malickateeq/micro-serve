@@ -2,6 +2,7 @@ package com.malikatique.microserve.config;
 
 
 import com.malikatique.microserve.MicroServeApplication;
+import com.malikatique.microserve.security.JwtService;
 import com.malikatique.microserve.security.SecurityConfigurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -12,6 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(MicroServeApplication.class)
 public class CommonAutoConfiguration {
+
+    @Autowired
+    JwtService jwtService;
+
 //    @Autowired
 //    private SecurityConfigurations securityConfigurations;
 //
@@ -20,4 +25,17 @@ public class CommonAutoConfiguration {
 //    public SecurityConfigurations securityConfig() {
 //        return securityConfigurations;
 //    }
+
+
+    @Bean
+    @ConditionalOnMissingBean
+    public JwtService jwtService() {
+        return jwtService;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public MicroServeApplication application() {
+        return new MicroServeApplication();
+    }
 }

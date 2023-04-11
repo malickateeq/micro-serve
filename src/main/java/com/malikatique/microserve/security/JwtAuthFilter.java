@@ -79,7 +79,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             System.out.println("Package: before doFilter");
             filterChain.doFilter(request, response);
             return;
-         } catch (RuntimeException ex) {
+        } catch (RuntimeException ex) {
             System.out.println("Package: In the Exception");
             response.setStatus(401);
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);

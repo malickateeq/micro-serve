@@ -20,7 +20,7 @@ public class SecurityConfigurations {
 
     private final MicoServiceSecurityConfig micoServiceSecurityConfig;
 
-    @Bean
+    // @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         System.out.println("Package: filterChain");
         http

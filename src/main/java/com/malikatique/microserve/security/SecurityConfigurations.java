@@ -18,9 +18,8 @@ public class SecurityConfigurations {
 
 //    private final JwtAuthFilter jwtAuthFilter;
 
-    @Autowired
-    private AuthenticationProvider authenticationProvider;
     private MicoServiceSecurityConfig micoServiceSecurityConfig;
+    private AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

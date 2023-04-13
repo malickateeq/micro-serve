@@ -16,9 +16,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurations {
 
 //    private final JwtAuthFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
 
-    private final MicoServiceSecurityConfig micoServiceSecurityConfig;
+    private AuthenticationProvider authenticationProvider;
+
+    private MicoServiceSecurityConfig micoServiceSecurityConfig;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

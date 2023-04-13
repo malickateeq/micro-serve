@@ -19,7 +19,7 @@ public class SecurityConfigurations {
 //
 //    private AuthenticationProvider authenticationProvider;
 //
-//    private MicoServiceSecurityConfig micoServiceSecurityConfig;
+    private MicoServiceSecurityConfig micoServiceSecurityConfig;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -27,8 +27,7 @@ public class SecurityConfigurations {
         http
             .csrf().disable() // Disable CSRF
             .authorizeHttpRequests() // Start authorizing HTTP requests
-            .requestMatchers("/auth/") // Exclude these API patterns
-//            .requestMatchers(micoServiceSecurityConfig.UN_AUTH_APIS) // Exclude these API patterns
+            .requestMatchers(micoServiceSecurityConfig.UN_AUTH_APIS) // Exclude these API patterns
             .permitAll() // Add above patterns to whitelist
             .anyRequest() // Select all other requests except the above ones
             .authenticated() // And make them authenticated

@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +18,8 @@ public class SecurityConfigurations {
 //    private final JwtAuthFilter jwtAuthFilter;
 
     private MicoServiceSecurityConfig micoServiceSecurityConfig;
+
+    @Autowired
     private AuthenticationProvider authenticationProvider;
 
     @Bean
@@ -40,4 +41,10 @@ public class SecurityConfigurations {
 
         return http.build();
     }
+
+    @Bean
+    public AuthenticationProvider customAuthProvider() {
+        return new CustomAuthProvider();
+    }
+
 }

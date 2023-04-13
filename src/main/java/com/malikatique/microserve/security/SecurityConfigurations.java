@@ -1,6 +1,7 @@
 package com.malikatique.microserve.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -16,9 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurations {
 
 //    private final JwtAuthFilter jwtAuthFilter;
-//
-//    private AuthenticationProvider authenticationProvider;
-//
+
+    @Autowired
+    private AuthenticationProvider authenticationProvider;
     private MicoServiceSecurityConfig micoServiceSecurityConfig;
 
     @Bean
@@ -33,9 +34,9 @@ public class SecurityConfigurations {
             .authenticated() // And make them authenticated
             .and()
             .sessionManagement() // Select Session Mgmt
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Disable Spring to create sessions
-//            .and()
-//            .authenticationProvider(authenticationProvider);
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable Spring to create sessions
+            .and()
+            .authenticationProvider(authenticationProvider);
 //            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

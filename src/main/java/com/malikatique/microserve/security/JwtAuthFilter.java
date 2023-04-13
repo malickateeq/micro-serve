@@ -1,6 +1,5 @@
 package com.malikatique.microserve.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.malikatique.microserve.exception.AuthException;
 import com.malikatique.microserve.models._User;
 import com.malikatique.microserve.repository._UserRepository;
@@ -9,6 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

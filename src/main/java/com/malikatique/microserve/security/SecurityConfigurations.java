@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfigurations {
 
@@ -20,7 +20,7 @@ public class SecurityConfigurations {
 
     private final MicoServiceSecurityConfig micoServiceSecurityConfig;
 
-    // @Bean
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         System.out.println("Package: filterChain");
         http

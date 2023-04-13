@@ -1,7 +1,0 @@
-server:
-  port: 8066
-spring:
-  main:
-    web-application-type: none
-  profiles:
-    active: "local"

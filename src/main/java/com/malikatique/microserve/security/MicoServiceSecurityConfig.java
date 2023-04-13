@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public class MicoServiceSecurityConfig {
     public static final String[] UN_AUTH_APIS = {
             "/common/",
+            "/auth",
             "/auth/",
             "/auth/send-otp",
             "/auth/register",

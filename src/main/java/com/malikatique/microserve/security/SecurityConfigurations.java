@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfigurations {
 
-    private final JwtAuthFilter jwtAuthFilter;
+//    private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
     private final MicoServiceSecurityConfig micoServiceSecurityConfig;
@@ -34,8 +34,8 @@ public class SecurityConfigurations {
             .sessionManagement() // Select Session Mgmt
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable Spring to create sessions
             .and()
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .authenticationProvider(authenticationProvider);
+//            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -1,6 +1,5 @@
 package com.malikatique.microserve.config;
 
-import com.malikatique.microserve.security.CustomAuthProvider;
 import com.malikatique.microserve.security.JwtService;
 import com.malikatique.microserve.utils.ApiResponse;
 import com.malikatique.microserve.utils.ObjectsValidator;
@@ -38,8 +37,4 @@ public class CommonAutoConfiguration {
         return new ObjectsValidator();
     }
 
-    @Bean
-    public AuthenticationProvider customAuthProvider() {
-        return new CustomAuthProvider();
-    }
 }

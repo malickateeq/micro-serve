@@ -19,8 +19,7 @@ public class SecurityConfigurations {
 
     private MicoServiceSecurityConfig micoServiceSecurityConfig;
 
-    @Autowired
-    private AuthenticationProvider authenticationProvider;
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

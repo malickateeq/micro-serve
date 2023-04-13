@@ -42,9 +42,4 @@ public class SecurityConfigurations {
         return http.build();
     }
 
-    @Bean
-    public AuthenticationProvider customAuthProvider() {
-        return new CustomAuthProvider();
-    }
-
 }

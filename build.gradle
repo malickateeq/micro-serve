@@ -10,7 +10,7 @@ repositories {
 }
 
 group = 'com.malikatique'
-version = '0.0.44'
+version = '0.0.45'
 sourceCompatibility = '17'
 
 dependencies {

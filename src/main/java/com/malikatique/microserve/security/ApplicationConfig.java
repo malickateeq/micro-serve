@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    // This will hold all the application config and beans. Also for UserDetailsService
+    // This will hold all the application config and beans. Also, for UserDetailsService
 
     private final _UserRepository userCollection;
 
@@ -40,7 +40,7 @@ public class ApplicationConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config ) throws Exception {
         return config.getAuthenticationManager();
     }

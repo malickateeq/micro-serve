@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @NoArgsConstructor
 @Import({ ApplicationConfig.class, SecurityConfigurations.class})
-@ConditionalOnClass({JwtService.class, ApplicationConfig.class})
+//@ConditionalOnClass({JwtService.class, ApplicationConfig.class})
 public class CommonAutoConfiguration {
 
     @Autowired

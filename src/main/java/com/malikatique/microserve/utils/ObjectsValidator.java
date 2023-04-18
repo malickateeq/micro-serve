@@ -9,6 +9,7 @@ import java.util.Set;
 
 @Component
 public class ObjectsValidator<T> {
+
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 

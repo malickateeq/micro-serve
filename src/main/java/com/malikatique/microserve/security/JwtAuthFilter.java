@@ -80,7 +80,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         } catch (RuntimeException ex) {
-            
+
             System.out.println("Package: In the Exception");
             System.out.println( ex.getMessage() );
 

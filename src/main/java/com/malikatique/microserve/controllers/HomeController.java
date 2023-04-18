@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/common")
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index() {
         return "AuthServe";
+    }
+
+    @GetMapping("/")
+    public String index2() {
+        return "AuthServe 2";
     }
 
     @GetMapping("/auth")

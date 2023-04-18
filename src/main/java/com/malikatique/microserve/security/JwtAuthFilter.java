@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -42,13 +43,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            System.out.println("Package: doFilterInternal");
             // Phase#1 Exclude Un Auth APIs
+            String uri = request.getRequestURI();
             boolean isExcluded = Arrays.stream(micoServiceSecurityConfig.UN_AUTH_APIS)
-                    .anyMatch(request.getRequestURI()::equals);
+                    .anyMatch(uri::equals);
+
             if(isExcluded) {
                 System.out.println("Bypassing UN_AUTH_API");
-                System.out.println(request.getRequestURI());
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -79,7 +80,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         } catch (RuntimeException ex) {
+            
             System.out.println("Package: In the Exception");
+            System.out.println( ex.getMessage() );
+
             response.setStatus(401);
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             Map<String, String> responseBody = new HashMap<>();
